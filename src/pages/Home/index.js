@@ -23,35 +23,27 @@ import {
 } from './styles'
 
 export default function Home() {
-  const [height, setHeight] = useState('')
-  const [weight, setWeight] = useState('')
-  const [imc, setImc] = useState(0)
+  const [imc, setImc] = useState([{ height: '', weight: '', imc: '' }])
+  const [newImc, setNewImc] = useState({ height: '', weight: '', imc: ''})
 
-  function CalculateIMC() {
-    try {
-      if(height > 0 && height != '') {
-        console.log(height)
-      }
-      else {
-        alert('Por favor, insira valores validos.')
-      }
-  
-      if(weight > 0 && weight != '') {
-        console.log(weight)
-      }
-      else {
-        alert('Por favor, insira valores validos.')
-      }
-  
-      const tempHeight = parseFloat(height)
-      const tempWeight = parseFloat(weight)
-      const tempImc = (tempWeight / (tempHeight * tempHeight)).toFixed(2)
-  
-      setImc(tempImc)
-      console.log(imc)
-    } 
-    catch (err) {
-      consolo.log(err)
+  function calculateImc() {
+    let imcResult = ''
+    let tempHeight = parseFloat(newImc.height)
+    let tempWeight = parseFloat(newImc.weight)
+
+    if(tempHeight > 1 && tempWeight > 0) {
+      imcResult = ((tempWeight / (tempHeight * tempHeight)).toFixed(2)).toString()
+
+      setNewImc({ ...newImc, imc: imcResult })
+      setImc([ ...imc, newImc ])
+      
+      console.log('\nnovo imc\n', newImc, '\n\nhistorico de imc\n', imc)
+
+      setNewImc({ height: '', weight: '', imc: '' })
+    }
+    else {
+      alert('Por favor, insira valores validos.')
+      setNewImc({ height: '', weight: '' })
     }
   }
 
@@ -67,7 +59,7 @@ export default function Home() {
 
           <LastResultContainer>
             <Title>Ultimo resultado</Title>
-            <ResultCard height={height} weight={weight} imc={imc} />
+            <ResultCard />
           </LastResultContainer>
 
           <CalculateContainer>
@@ -75,12 +67,12 @@ export default function Home() {
 
             <InputContainer>
               <Input 
-                placeholder='Insira sua altura (cm)' 
+                placeholder='Insira sua altura (m)' 
                 placeholderTextColor='#114B5F'
                 color='#114B5F'
                 keyboardType='decimal-pad'
-                defaultValue=''
-                onChangeText={(heightValue) => setHeight(heightValue)}
+                value={newImc.height}
+                onChangeText={(value) => setNewImc({ ...newImc, height: value })}
               />
             </InputContainer>
             <InputContainer>
@@ -89,17 +81,17 @@ export default function Home() {
                 placeholderTextColor='#114B5F'
                 color='#114B5F'
                 keyboardType='decimal-pad'
-                defaultValue=''
-                onChangeText={(weightValue) => setWeight(weightValue)}
+                value={newImc.weight}
+                onChangeText={(value) => setNewImc({ ...newImc, weight: value })}
               />
             </InputContainer>
-            <CalculateButton onPress={CalculateIMC}>
+            <CalculateButton onPress={calculateImc}>
               <CalculateButtonText>Calcular</CalculateButtonText>
             </CalculateButton>
 
-            { imc ? (
+            { newImc.imc ? (
             <ResultContainer>
-              <Result>Seu IMC é: {imc}</Result>
+              <Result>Seu IMC é: {newImc.imc}</Result>
             </ResultContainer>) : null }
             
           </CalculateContainer>

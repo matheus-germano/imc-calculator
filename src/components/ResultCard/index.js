@@ -2,18 +2,18 @@ import React from 'react';
 
 import { CardContainer, CardHeader, Calculation, Date, ImcResult } from './styles'
 
-export default function ResultCard(props) {
+export default function ResultCard() {
   return(
     <CardContainer>
-      { props.imc ? (
-      <>
+      {/* { props.imc ? ( */}
+      {/* <>
         <CardHeader>
           <Calculation>IMC = {props.weight} / ({props.height} x {props.height})</Calculation>
           <Date>dd/mm/aa</Date>
         </CardHeader>
         <ImcResult>{props.imc}</ImcResult>
-      </>
-      ) : (
+      </> */}
+      {/* ) : ( */}
         <>
           <CardHeader>
             <Calculation>IMC = weight / (height x height)</Calculation>
@@ -21,7 +21,7 @@ export default function ResultCard(props) {
           </CardHeader>
           <ImcResult>IMC</ImcResult>
         </>
-      )}
+      {/* )} */}
       
     </CardContainer>
   )
