@@ -5,11 +5,24 @@ import { CardContainer, CardHeader, Calculation, Date, ImcResult } from './style
 export default function ResultCard(props) {
   return(
     <CardContainer>
-      <CardHeader>
-        <Calculation>IMC = {props.weight} / ({props.height} x {props.height})</Calculation>
-        <Date>dd/mm/aa</Date>
-      </CardHeader>
-      <ImcResult>{props.imc}</ImcResult>
+      { props.imc ? (
+      <>
+        <CardHeader>
+          <Calculation>IMC = {props.weight} / ({props.height} x {props.height})</Calculation>
+          <Date>dd/mm/aa</Date>
+        </CardHeader>
+        <ImcResult>{props.imc}</ImcResult>
+      </>
+      ) : (
+        <>
+          <CardHeader>
+            <Calculation>IMC = weight / (height x height)</Calculation>
+            <Date>dd/mm/aa</Date>
+          </CardHeader>
+          <ImcResult>IMC</ImcResult>
+        </>
+      )}
+      
     </CardContainer>
   )
 }
