@@ -8,6 +8,6 @@ IMC is a global simple calculation that shows up if you are a healthy person or 
 
 The app have few pages and features, including:
 
-- IMC Calculation Page, where you can calculate your IMC inserting your height and weight in the correctly fields;
-- Results Page, that shows all your results that already have been calculated;
-- About Page, just to explain what IMC is and how calculate it.
+- IMC Calculation Page, where you can calculate your IMC by inserting your height and weight in the correctly fields;
+- Results Page, that shows all your results that have been already calculated;
+- About Page, which explain what IMC is and how calculate it.
