@@ -23,8 +23,8 @@ import {
 } from './styles'
 
 export default function Home() {
-  const [imc, setImc] = useState([{ height: '', weight: '', imc: '' }])
-  const [newImc, setNewImc] = useState({ height: '', weight: '', imc: ''})
+  const [imc, setImc] = useState([])
+  const [newImc, setNewImc] = useState({ id: 0, height: '', weight: '', imc: ''})
 
   function calculateImc() {
     let imcResult = ''
@@ -32,9 +32,9 @@ export default function Home() {
     let tempWeight = parseFloat(newImc.weight)
 
     if(tempHeight > 1 && tempWeight > 0) {
-      imcResult = ((tempWeight / (tempHeight * tempHeight)).toFixed(2)).toString()
+      imcResult = ((tempWeight / (tempHeight * tempHeight)).toFixed(2)).toString();
 
-      setNewImc({ ...newImc, imc: imcResult })
+      setNewImc({ ...newImc, imc: imcResult, id: imc.lenght + 1 })
       setImc([ ...imc, newImc ])
       
       console.log('\nnovo imc\n', newImc, '\n\nhistorico de imc\n', imc)
