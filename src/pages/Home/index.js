@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {
   TouchableWithoutFeedback,
-  Keyboard, 
+  Keyboard,
+  ScrollView
 } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
@@ -24,7 +25,12 @@ import {
 
 export default function Home() {
   const [imc, setImc] = useState([])
-  const [newImc, setNewImc] = useState({ id: 0, height: '', weight: '', imc: ''})
+  const [newImc, setNewImc] = useState({ 
+    id: 0, 
+    height: '', 
+    weight: '', 
+    imc: ''
+  })
 
   function calculateImc() {
     let imcResult = ''
@@ -34,17 +40,31 @@ export default function Home() {
     if(tempHeight > 1 && tempWeight > 0) {
       imcResult = ((tempWeight / (tempHeight * tempHeight)).toFixed(2)).toString();
 
-      setNewImc({ ...newImc, imc: imcResult, id: imc.lenght + 1 })
+      setNewImc({ ...newImc, imc: imcResult })
       setImc([ ...imc, newImc ])
-      
-      console.log('\nnovo imc\n', newImc, '\n\nhistorico de imc\n', imc)
-
-      setNewImc({ height: '', weight: '', imc: '' })
     }
     else {
       alert('Por favor, insira valores validos.')
-      setNewImc({ height: '', weight: '' })
+      setNewImc({ height: '', weight: '', imc: '' })
     }
+
+    console.log('\nnovo imc\n', newImc, '\n\nhistorico de imc\n', imc)
+
+    // if(tempHeight > 1 && tempWeight > 0) {
+    //   imcResult = ((tempWeight / (tempHeight * tempHeight)).toFixed(2)).toString();
+
+    //   setNewImc({ ...newImc, imc: imcResult })
+    //   setNewImc({ ...newImc, id: imc.length })
+    //   setImc([ ...imc, newImc ])
+      
+    //   console.log('\nnovo imc\n', newImc, '\n\nhistorico de imc\n', imc)
+
+    //   setNewImc({ height: '', weight: '', imc: '' })
+    // }
+    // else {
+    //   alert('Por favor, insira valores validos.')
+    //   setNewImc({ height: '', weight: '' })
+    // }
   }
 
   return(
@@ -62,39 +82,41 @@ export default function Home() {
             <ResultCard />
           </LastResultContainer>
 
-          <CalculateContainer>
-            <Title>Calcule seu IMC</Title>
+          <ScrollView style= {{ flex: 1 }}>
+            <CalculateContainer>
+              <Title>Calcule seu IMC</Title>
 
-            <InputContainer>
-              <Input 
-                placeholder='Insira sua altura (m)' 
-                placeholderTextColor='#114B5F'
-                color='#114B5F'
-                keyboardType='decimal-pad'
-                value={newImc.height}
-                onChangeText={(value) => setNewImc({ ...newImc, height: value })}
-              />
-            </InputContainer>
-            <InputContainer>
-              <Input 
-                placeholder='Insira seu peso (kg)' 
-                placeholderTextColor='#114B5F'
-                color='#114B5F'
-                keyboardType='decimal-pad'
-                value={newImc.weight}
-                onChangeText={(value) => setNewImc({ ...newImc, weight: value })}
-              />
-            </InputContainer>
-            <CalculateButton onPress={calculateImc}>
-              <CalculateButtonText>Calcular</CalculateButtonText>
-            </CalculateButton>
+              <InputContainer>
+                <Input 
+                  placeholder='Insira sua altura (m)' 
+                  placeholderTextColor='#114B5F'
+                  color='#114B5F'
+                  keyboardType='decimal-pad'
+                  value={newImc.height}
+                  onChangeText={(value) => setNewImc({ ...newImc, height: value })}
+                />
+              </InputContainer>
+              <InputContainer>
+                <Input 
+                  placeholder='Insira seu peso (kg)' 
+                  placeholderTextColor='#114B5F'
+                  color='#114B5F'
+                  keyboardType='decimal-pad'
+                  value={newImc.weight}
+                  onChangeText={(value) => setNewImc({ ...newImc, weight: value })}
+                />
+              </InputContainer>
+              <CalculateButton onPress={calculateImc}>
+                <CalculateButtonText>Calcular</CalculateButtonText>
+              </CalculateButton>
 
-            { newImc.imc ? (
-            <ResultContainer>
-              <Result>Seu IMC é: {newImc.imc}</Result>
-            </ResultContainer>) : null }
-            
-          </CalculateContainer>
+              { newImc.imc ? (
+              <ResultContainer>
+                <Result>Seu IMC é: {newImc.imc}</Result>
+              </ResultContainer>) : null }
+              
+            </CalculateContainer>
+          </ScrollView>
         </HomeContainer>
       </LinearGradient>
     </TouchableWithoutFeedback>
