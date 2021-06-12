@@ -36,3 +36,14 @@ export const Text = styled.Text`
 
   margin-bottom: 15px;
 `;
+
+export const TableContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 15px;
+`;
+
+export const TableImage = styled.Image`
+  margin: 0 auto;
+`;
