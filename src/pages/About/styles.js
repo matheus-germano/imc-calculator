@@ -34,13 +34,14 @@ export const Text = styled.Text`
   color: #333;
   text-align: justify;
 
+  margin-top: 10px;
   margin-bottom: 15px;
 `;
 
 export const TableContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin-top: 10px;
   margin-bottom: 15px;
 `;
 
